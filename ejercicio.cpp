@@ -5,12 +5,9 @@
 #include<cmath>
 
 using namespace std;
-    static float dx = 2.23; 
-    static float dt = 0.1;
-    int Num = 30;
-    int veces = 10;
+    
 
-void difu(string nombre_txt){
+void difu(string nombre_txt, float dx,float dt,int Num,int veces){
 	ofstream file;
 	file.open(nombre_txt.c_str());
 	float datosx[Num][Num];
@@ -56,7 +53,10 @@ void difu(string nombre_txt){
 
 int main()
 {
-    
-	difu("parte1.dat");
+    static float dx = 2.23; 
+    static float dt = 0.1;
+    static int Num = 30;
+    static int veces = 10;
+	difu("parte1.dat",dx,dt,Num,veces);
 	return 0;
 }

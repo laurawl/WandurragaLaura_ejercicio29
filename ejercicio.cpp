@@ -7,56 +7,40 @@
 using namespace std;
     
 
-void difu(string nombre_txt, float dx,float dt,int Num,int veces){
+void difu(string nombre_txt, float dx,float dt,int num, int numt)
+{
 	ofstream file;
 	file.open(nombre_txt.c_str());
-	float datosx[Num][Num];
-    int ident[Num][Num];
-	float datosxn[Num][Num];
-	for (int i = 0; i < Num; ++i)
+	float datosxn[numt][num];
+    for (int i = 0; i < numt; ++i)
 	{
-		for (int j = 0; j < Num; ++j)
+		for (int j = 0; j < num; ++j)
 		{	
-			datosx[i][j]=10;
-            if (i==j)
-            {
-                ident[i][j]=1;
-            }
-            else
-            {
-                ident[i][j]=0;
-            }
-		}
-	}
-	for (int k = 0; k <= veces; ++k)
+           datosxn[i][j]=0;
+        }
+    }          
+          
+	for (int i = 0; i < numt-1; ++i)
 	{
-		file << "Intento:"<<k<<"\n";
-		for (int i = 0; i < Num; ++i)
-		{
-			for (int j = 0; j < Num; ++j)
-			{	
-				datosxn[i][j]=(datosx[i+1][j]+datosx[i-1][j])/(dx*dx)-(2/(dx*dx)*datosx[i][j]);
-				file << datosx[i][j]<< ",";
-			}
+		for (int j = 1; j < num-1; ++j)
+		{	
+            
+       datosxn[i+1][j]=(datosxn[i][j])+(datosxn[i][j+1]+datosxn[i][j-1]-2*datosxn[i][j])*dt/pow(dx,2)+dt;
+			file << datosxn[i][j]<< " ";
+		}
 			file << "\n";
 		}
-		for (int i = 0; i < Num; ++i)
-		{
-			for (int j = 0; j < Num; ++j)
-			{
-				datosx[i][j]=datosxn[i][j];
-			}
-		}
-	}
-	file.close();
+		file.close();
 }
+     
+		
 
 int main()
 {
-    static float dx = 2.23; 
-    static float dt = 0.1;
-    static int Num = 30;
-    static int veces = 10;
-	difu("parte1.dat",dx,dt,Num,veces);
+    static int numx = 30;
+    static int numt = 500;
+    static float dx = 2.0/numx; 
+    static float dt = 1.0/numt;
+	difu("parte1.dat",dx,dt,numx,numt);
 	return 0;
 }

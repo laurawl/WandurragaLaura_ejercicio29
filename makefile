@@ -1,4 +1,4 @@
-envolve_A.png.png : graficar.py parte1.dat
+envolve_A.png : graficar.py parte1.dat
 	python graficar.py
 	
 parte1.dat : ejercicio.x
